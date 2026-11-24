@@ -1,0 +1,81 @@
+{
+	"name": "material-web-all-plugin",
+	"version": "^2.5.1-nightly.2686819.0",
+	"description": "Rollup/Vite plugin that manages @material/web components imports for you (Material 3 Expressive included).",
+	"type": "module",
+	"license": "MIT",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/vdegenne/material-web-all-plugin.git"
+	},
+	"homepage": "https://github.com/vdegenne/material-web-all-plugin#readme",
+	"bugs": {
+		"url": "https://github.com/vdegenne/material-web-all-plugin/issues"
+	},
+	"keywords": [
+		"material-web",
+		"material-3-expressive",
+		"rollup",
+		"vite",
+		"plugin",
+		"code-splitting",
+		"web-components"
+	],
+	"exports": {
+		"./rollup": {
+			"types": "./lib/plugins/rollup/index.d.ts",
+			"import": "./lib/plugins/rollup/index.js"
+		},
+		"./vite": {
+			"types": "./lib/plugins/vite/index.d.ts",
+			"import": "./lib/plugins/vite/index.js"
+		}
+	},
+	"files": [
+		"lib/core/",
+		"lib/plugins/",
+		"mapping.json"
+	],
+	"scripts": {
+		"build": "wireit",
+		"generate:mapping": "wireit",
+		"test": "wireit"
+	},
+	"wireit": {
+		"build": {
+			"command": "tsc --pretty",
+			"clean": "if-file-deleted",
+			"files": [
+				"./tsconfig.json",
+				"./src"
+			],
+			"output": [
+				"./lib"
+			]
+		},
+		"generate:mapping": {
+			"command": "node ./lib/scripts/generate-mapping.js",
+			"dependencies": [
+				"build"
+			]
+		},
+		"test": {
+			"command": "node --test ./lib/test",
+			"dependencies": [
+				"build"
+			]
+		}
+	},
+	"dependencies": {
+		"@rollup/pluginutils": "^5.5.1",
+		"es-module-lexer": "^3.0.5"
+	},
+	"devDependencies": {
+		"@material/web": "^2.5.1-nightly.2686819.0",
+		"@types/node": "^26.6.6",
+		"rollup": "^4.68.8",
+		"typescript": "^7.0.2",
+		"vite": "^8.3.8",
+		"wireit": "^0.15.0"
+	}
+}
