@@ -2,7 +2,7 @@
 
 A Rollup/Vite plugin that automatically manages `@material/web` component imports for you.
 
-It supports both the original [Material 3 Web components](https://github.com/material-components/material-web) (e.g. `md-filled-button`) as well as [Material 3 Expressive components](https://github.com/material-components/material-web/tree/main/labs/gb/components) (e.g. `md-gb-split-button`).
+It supports both the original [Material 3 Web Components](https://github.com/material-components/material-web) (e.g. `md-filled-button`) as well as [Material 3 Expressive Web Components](https://github.com/material-components/material-web/tree/main/labs/gb/components) (e.g. `md-gb-split-button`).
 
 ## How to use
 

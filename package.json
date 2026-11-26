@@ -1,7 +1,7 @@
 {
 	"name": "material-web-all-plugin",
 	"version": "^2.5.1-nightly.2686819.0",
-	"description": "Rollup/Vite plugin that manages @material/web components imports for you (Material 3 Expressive included).",
+	"description": "Rollup/Vite plugin that manages @material/web components imports for you (supports Material 3 Expressive Web Components too!).",
 	"type": "module",
 	"license": "MIT",
 	"repository": {
