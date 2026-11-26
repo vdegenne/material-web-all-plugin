@@ -1,6 +1,6 @@
 import {init, parse} from 'es-module-lexer'
 import {readFile, readdir, writeFile} from 'node:fs/promises'
-import {dirname, join, relative, sep} from 'node:path'
+import {basename, dirname, join, relative, sep} from 'node:path'
 import {fileURLToPath} from 'node:url'
 
 await init()
@@ -66,10 +66,16 @@ for (const file of labsFiles) {
 }
 
 // 3. GB components
-const gbFiles = await getJavaScriptFiles(gbComponentsPath)
+const gbFiles = await getJavaScriptFiles(join(labsPath, 'gb'))
 
 for (const file of gbFiles) {
-	await addModule(file)
+	const name = basename(file, '.js')
+
+	if (!name.startsWith('md-gb-')) continue
+
+	const moduleSpecifier = relative(packageRoot, file).split(sep).join('/')
+
+	mapping[name] = `@material/web/${moduleSpecifier}`
 }
 
 const mappingPath = fileURLToPath(

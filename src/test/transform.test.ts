@@ -183,4 +183,15 @@ describe('transformSource', () => {
 			/import '@mahmoodkhalil\/material-web-3-demo\/dialog\/dialog\.js'/,
 		)
 	})
+
+	it('preserves global imports with named bindings', async () => {
+		const source = `
+		import {MdFilterChip, MdMenu} from '@material/web/all.js'
+		import {MdSplitButton} from '@material/web/labs/gb/components/all.js'
+	`
+
+		const result = await transformSource(source, {})
+
+		assert.equal(result, source)
+	})
 })

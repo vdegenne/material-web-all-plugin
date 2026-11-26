@@ -7,16 +7,18 @@ const lexerReady = init()
 export interface TransformOptions {
 	/**
 	 * Whether to remove comments before detecting Material Web components.
+	 *
 	 * Defaults to `true`.
 	 */
 	ignoreComments?: boolean
 
 	/**
 	 * Package prefix used for generated imports.
-	 * Defaults to `@material/web`.
 	 *
 	 * Can be changed to use a fork or a custom Material Web package.
 	 * For example: `@mahmoodkhalil/material-web-3-demo`.
+	 *
+	 * Defaults to `@material/web`.
 	 */
 	prefix?: string
 }
@@ -39,9 +41,15 @@ export async function transformSource(
 		`${normalizedPrefix}/labs/gb/components/all.js`,
 	])
 
-	const allImports = imports.filter(
-		(item) => item.type === 'static' && globalImports.has(item.specifier),
-	)
+	const allImports = imports.filter((item) => {
+		if (item.type !== 'static' || !globalImports.has(item.specifier)) {
+			return false
+		}
+
+		const declaration = source.slice(item.importStart, item.importEnd)
+
+		return /^import\s*['"]/.test(declaration.trim())
+	})
 
 	const existingImports = new Set(
 		imports

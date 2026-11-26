@@ -1,8 +1,7 @@
 import type {Plugin} from 'vite'
-import {
-	materialWebAll as materialWebAllRollup,
-	type MaterialWebAllOptions,
-} from '../rollup/index.js'
+import {createPluginHooks, type PluginOptions} from '../../core/plugin.js'
+
+export interface MaterialWebAllOptions extends PluginOptions {}
 
 /**
  * Vite adapter for the Material Web All plugin.
@@ -11,9 +10,10 @@ import {
  *
  * Accepts the same options as the Rollup plugin.
  */
-export function materialWebAll(options?: MaterialWebAllOptions): Plugin {
+export function materialWebAll(options?: MaterialWebAllOptions) {
 	return {
-		...materialWebAllRollup(options),
+		name: 'vite-plugin-material-web-all',
+		...createPluginHooks(options),
 		apply: 'build',
-	} as unknown as Plugin
+	} satisfies Plugin
 }
