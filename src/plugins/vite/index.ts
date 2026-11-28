@@ -2,6 +2,11 @@ import type {Plugin} from 'vite'
 import {createPluginHooks, type PluginOptions} from '../../core/plugin.js'
 
 export interface MaterialWebAllOptions extends PluginOptions {
+	/**
+	 * Apply production transformations during development.
+	 *
+	 * Defaults to `false`.
+	 */
 	emulateProduction?: boolean
 }
 
